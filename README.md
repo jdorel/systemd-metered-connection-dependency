@@ -34,7 +34,7 @@ Network Manager might not guess the metered connection status. If so, use the fo
 # nmcli> quit
 ```
 
-## How does it work
+## How does it work ?
 
   1. When you add the `unmetered-connection.target` dependency to your service with `Requires` and `After`, if the target fails, the service won't start.
   2. `unmetered-connection.target` is dependent on `check-metered-connection.service`, if the service fails, the target will fail too.
