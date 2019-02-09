@@ -9,6 +9,16 @@ Install `check-metered-connection.sh` in `/usr/local/bin`.
 
 Execute `systemctl daemon-reload`
 
+## Usage
+
+Add the following to any unit you do not want to execute on a metered connection
+
+```
+[Unit]
+Requires=check-metered-connection.service
+After=check-metered-connection.service
+```
+
 ## Things to improve
 
 Support other connection managers
