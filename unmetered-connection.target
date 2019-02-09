@@ -1,4 +1,4 @@
 [Unit]
 Description=Unmetered connection
-Requires=check-metered-connection-status.service
-After=check-metered-connection-status.service
+Requires=check-metered-connection.service
+After=check-metered-connection.service
