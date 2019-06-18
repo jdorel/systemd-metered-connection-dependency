@@ -1,7 +1,7 @@
 [Unit]
 Description=Exemple service to check metered connection status
-Requires=check-metered-connection.service
-After=check-metered-connection.service
+Requires=unmetered-connection.service
+After=unmetered-connection.service
 
 [Service]
 Type=oneshot

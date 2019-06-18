@@ -1,4 +1,0 @@
-[Unit]
-Description=Unmetered connection
-Requires=check-metered-connection.service
-After=check-metered-connection.service
