@@ -1,6 +1,0 @@
-[Unit]
-Description=Metered connection status checker
-
-[Service]
-Type=oneshot
-ExecStart=check-metered-connection.sh

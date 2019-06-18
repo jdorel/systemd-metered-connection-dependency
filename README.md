@@ -2,12 +2,17 @@
 Execute systemd services if current connection is not metered.
 
 ## Installation
-
-Install the `unmetered-connection.target` and `check-metered-connection.service` in `/usr/local/lib/systemd/system`.
-
+```
+Install `unmetered-connection.service` in `/usr/local/lib/systemd/system`.
 Install `check-metered-connection.sh` in `/usr/local/bin`.
-
 Execute `systemctl daemon-reload`
+```
+
+/!\ If you want it to be available to your users:
+```
+Install `unmetered-connection.service` in `/usr/local/lib/systemd/user`.
+Execute `systemctl --user daemon-reload`
+```
 
 ## Usage
 
@@ -17,8 +22,8 @@ Add the following to any unit you do not want to execute on a metered connection
 
 ```
 [Unit]
-Requires=check-metered-connection.service
-After=check-metered-connection.service
+Requires=unmetered-connection.service
+After=unmetered-connection.service
 ```
 
 See `exemple.service` for an exemple usage.
@@ -36,10 +41,10 @@ Network Manager might not guess the metered connection status. If so, use the fo
 
 ## How does it work ?
 
-  1. When you add the `unmetered-connection.target` dependency to your service with `Requires` and `After`, if the target fails, the service won't start.
-  2. `unmetered-connection.target` is dependent on `check-metered-connection.service`, if the service fails, the target will fail too.
-  3. `check-metered-connection.service` calls the `check-metered-connection.sh` bash script.
-  4. `check-metered-connection.sh` then uses DBUS and NetworkManager to check on the current connection status. It returns 0 for an unmetered connection and 1 for a metered connection.
+  1. When you add the `unmetered-connection.service` dependency to your service with `Requires` and `After`, on activation, your service will start `unmetered-connection.service`.
+  2. `unmetered-connection.service` will execute the `check-metered-connection.sh` bash script.
+  3. `check-metered-connection.sh` then uses DBUS and NetworkManager to check on the current connection status. It returns 0 for an unmetered connection and 1 for a metered connection.
+  4. If the script returns zero, `unmetered-connection.service` will fail, preventing execution of your service.
 
 ## Things to improve
 
@@ -50,3 +55,5 @@ Display better logs
 Package it
 
 Manage multiple connections
+
+Disable metered verification through a service
