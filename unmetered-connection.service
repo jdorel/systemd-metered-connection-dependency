@@ -1,0 +1,7 @@
+[Unit]
+Description=Check if the current connection is metered
+
+[Service]
+Type=oneshot
+ExecStart=check-metered-connection.sh
+
