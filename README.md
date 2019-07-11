@@ -33,10 +33,7 @@ See `exemple.service` for an exemple usage.
 Network Manager might not guess the metered connection status. If so, use the following to mark a connection as metered:
 
 ```
-# shell> nmcli con edit <connection-name>
-# nmcli> set connection.metered yes
-# nmcli> save
-# nmcli> quit
+$ nmcli con modify <connection-name> connection.metered yes
 ```
 
 ## How does it work ?
@@ -52,8 +49,12 @@ Support other connection managers
 
 Display better logs
 
-Package it
+Package it (AUR)
 
 Manage multiple connections
 
 Disable metered verification through a service
+
+Directly hook DBUS to systemd service
+
+Use systemd target to start/stop services ?
